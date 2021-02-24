@@ -54,7 +54,7 @@ def get_words():
 
 
 
-def search_word(word, puzzle):
+def find_word(word, puzzle):
 	'''
 	Searches the puzzle for a specified word.
 	Loop through the list of words and call this function each time to find all words.
@@ -68,16 +68,28 @@ def find_first_letter(puzzle, word):
 	searches the puzzle for the first letter of the specified word.
 	Once first letter is found, returns row and col location so that searching can begin.
 	'''
-	pass
 
-def check_row(row, word):
+	for i in puzzle:
+
+		for j in puzzle:
+
+			if puzzle[i][j] == word[0]:
+
+				row = i
+
+				col = j
+
+				return (row, col)
+
+
+def check_row(puzzle, row, word):
 	'''
 	Use .find to check for word in row
 	Returns true and 'forward' if word is in row, else returns false
 	'''
 	pass
 
-def check_row_backward(row, word):
+def check_row_backward(puzzle, row, word):
 	'''
 	Use .find to check for word in row
 	Returns true and 'backward' if word is in row, else returns false
@@ -85,7 +97,7 @@ def check_row_backward(row, word):
 	pass
 
 
-def check_col_down(col, word):
+def check_col_down(puzzle, col, word):
 	'''
 	Use .find to check a col for word
 	Returns true and 'down' if word is in col, else returns false
@@ -93,7 +105,7 @@ def check_col_down(col, word):
 	pass
 
 
-def check_col_up(col, word):
+def check_col_up(puzzle, col, word):
 	'''
 	Use .find to check a col for word
 	Returns true and 'up' if word is in col, else returns false
@@ -101,7 +113,7 @@ def check_col_up(col, word):
 	pass
 
 
-def check_diagonal(row, col, word):
+def check_diagonal(puzzle, row, col, word):
 	'''
 	Add one to row and col to increment diagonally
 	Be carful of indexing outside of the puzzle when adding one to row and col
