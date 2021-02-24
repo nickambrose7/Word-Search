@@ -5,13 +5,54 @@ def get_puzzle():
 	'''
 	gets input from user and converts into a list within a list representing the puzzle
 	'''
-	pass
+	user_input = input() #We do not need to prompt user for input
 
-def get_words():
+	puzzle = [] 
+
+	for i in range(0, len(user_input), 10): #range 0 to 100, counting by ten ex.) [0, 9, 19,.....,99]
+		
+		if i == 9: #so that we start from 0
+
+			partial_string = user_input[:i + 1] #take a slice of the user input starting at first letter (0, inclusive) going to tenth letter (10, exclusive)
+
+			puzzle.append(partial_string) #appends the new partial string to the puzzle at spot 0
+
+		else:
+
+			new_list = user_input[i:i + 10] #now we can start at i and go to i +10
+
+			puzzle.append(new_list)
+
+	return puzzle
+			
+
+
+def get_words(): 
 	'''
 	Gets input from user and converts into a list of words
 	'''
-	pass
+
+	user_input = input()
+
+	words = []
+
+	beginning = 0 #need this for first round in loop 
+
+	for i in range(len(user_input)):
+
+		if user_input[i] == ' ': #this code shows why order is so important
+
+			end = i #Set end equal to the index of the space
+
+			word = user_input[beginning:end] 
+
+			words.append(word)
+
+			beginning =  i + 1 #set our beginning equal to our previous end to set us up for the next time this loop runs. Must add one so that we start at the first letter not the space.
+
+	return words
+
+
 
 def search_word(word, puzzle):
 	'''
