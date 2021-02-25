@@ -69,9 +69,9 @@ def find_first_letter(puzzle, word):
 	Once first letter is found, returns row and col location so that searching can begin.
 	'''
 
-	for i in puzzle:
+	for i in range(len(puzzle)):
 
-		for j in puzzle:
+		for j in range(len(puzzle)):
 
 			if puzzle[i][j] == word[0]:
 
@@ -82,35 +82,103 @@ def find_first_letter(puzzle, word):
 				return (row, col)
 
 
-def check_row(puzzle, row, word):
+def check_row(puzzle, row, col, word): #Only reason I'm inculding row AND col is to make it easier if we find the word.
 	'''
 	Use .find to check for word in row
 	Returns true and 'forward' if word is in row, else returns false
 	'''
-	pass
 
-def check_row_backward(puzzle, row, word):
+	row_list = puzzle[row]
+
+	row_string = ''.join(row_list) #creates a string out of a list so that we can use .find
+
+	num = row_string.find(word) #.find returns the index of the first occurance of the substring, else returns -1.
+
+	if num == col:
+
+		return (True, 'FORWARD', row, col)
+
+	else:
+
+		return False #Shows the word in not in the row.
+
+
+
+def check_row_backward(puzzle, row, col, word):
 	'''
 	Use .find to check for word in row
 	Returns true and 'backward' if word is in row, else returns false
 	'''
-	pass
+
+	row_list = puzzle[row]
+
+	rev_list = [] #row list in reverse
+
+	for i in range(len(row_list) - 1, -1, -1): #borrowed from an old activity, counts backwards, perfect for reversing a list.
+
+		rev_list.append(puzzle[row][i]) #makes reverse list
+
+	rev_row_string = ''.join(rev_list) #Turns reverse list into a string
+
+	num = rev_row_string.find(word)
+
+	if num != -1: #find will return -1 if word is not found
+
+		return (True, 'BACKWARD', row, col)
+
+	else:
+
+		return False #Shows the word in not in the row.
 
 
-def check_col_down(puzzle, col, word):
+
+def check_col_down(puzzle, row, col, word):
 	'''
 	Use .find to check a col for word
 	Returns true and 'down' if word is in col, else returns false
 	'''
-	pass
+
+	col_list = []
+
+	for i in range(9):
+
+		col_list.append(puzzle[i][col]) #we want the row to change and the col to stay the same
+
+	col_string = ''.join(col_list) #same process as usual once we make the string
+
+	num = col_string.find(word)
+
+	if num != -1:
+
+		return (True, 'DOWN', row, col)
+
+	else:
+
+		return False
 
 
-def check_col_up(puzzle, col, word):
+def check_col_up(puzzle, row, col, word):
 	'''
 	Use .find to check a col for word
 	Returns true and 'up' if word is in col, else returns false
 	'''
-	pass
+	col_list = []
+
+	for i in range(9, -1, -1): # Count backwards to reverse the list, otherwise same procedure as last time.
+
+		col_list.append(puzzle[i][col])
+
+	col_string = ''.join(col_list)
+
+	num = col_string.find(word)
+
+	if num != -1:
+
+		return (True, 'UP', row, col)
+
+	else:
+
+		return False 
 
 
 def check_diagonal(puzzle, row, col, word):
@@ -119,7 +187,31 @@ def check_diagonal(puzzle, row, col, word):
 	Be carful of indexing outside of the puzzle when adding one to row and col
 	return true and diagonal if word is in diagonal, else return false
 	'''
-	pass
+
+	diag_list = [] 
+
+	for i in range(9):
+
+		if (i + row) <= 9 and (i + col) <= 9: #make sure we stay within indexes
+
+			diag_list.append(puzzle[row + i][col +i]) #this is how we move diagonally, rest of code is the same
+
+	diag_string = ''.join(diag_list)
+
+	num = diag_string.find(word)
+
+	if num != -1:
+
+		return (True, 'DIAGONAL', row, col)
+
+	else:
+
+		return False 
+
+
+
+
+	
 
 
 
