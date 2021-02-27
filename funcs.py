@@ -54,14 +54,41 @@ def get_words():
 
 
 
-def find_word(word, puzzle):
+def search_word(word, puzzle):
 	'''
 	Searches the puzzle for a specified word.
 	Loop through the list of words and call this function each time to find all words.
 	This function returns none or direction, row, and col of the word.
 
 	'''
-	pass
+
+	row = find_first_letter(puzzle, word)[0]
+
+	col = find_first_letter(puzzle, word)[1]
+
+
+	if check_row(puzzle, row, col, word)[0]:
+
+		return (check_row(puzzle, row, col, word)[1], row, col)
+	
+	elif check_row_backward(puzzle, row, col, word)[0]:
+
+		return (check_row_backward(puzzle, row, col, word)[1], row, col):
+	
+	elif check_col_down(puzzle, row, col, word)[0]:
+
+		return (check_col_down(puzzle, row, col, word)[1], row, col)
+	
+	elif check_col_up(puzzle, row, col, word)[0]:
+
+		return (check_col_up(puzzle, row, col, word)[1], row, col)
+
+	elif check_diagonal(puzzle, row, col, word)[0]:
+
+		return (check_diagonal(puzzle, row, col, word)[1], row, col)
+
+
+	
 
 def find_first_letter(puzzle, word):
 	'''
