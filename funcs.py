@@ -139,17 +139,13 @@ def check_row_backward(puzzle, row, col, word):
 
 	row_list = puzzle[row]
 
-	rev_list = [] #row list in reverse
+	row_string = ''.join(row_list)
 
-	for i in range(len(row_list) - 1, -1, -1): #borrowed from an old activity, counts backwards, perfect for reversing a list.
+	rev_word = word[::-1]
 
-		rev_list.append(puzzle[row][i]) #makes reverse list
+	word_slice = row_string[(col - len(word) +1):col + 1] #adjust b/c backwards
 
-	rev_row_string = ''.join(rev_list) #Turns reverse list into a string
-
-	word_slice = rev_row_string[col:(col + len(word))] #adjust b/c backwards
-
-	num = rev_row_string.find(word)
+	num = word_slice.find(rev_word)
 
 	if num != -1: #find will return -1 if word is not found
 
@@ -195,17 +191,17 @@ def check_col_up(puzzle, row, col, word):
 	'''
 	col_list = []
 
-	for i in range(9, -1, -1): # Count backwards to reverse the list, otherwise same procedure as last time.
+	for i in range(9):
 
-		col_list.append(puzzle[i][col])
+		col_list.append(puzzle[i][col]) #we want the row to change and the col to stay the same
 
-	col_string = ''.join(col_list)
+	col_string = ''.join(col_list) #same process as usual once we make the string
 
+	rev_word = word[::-1]
 
+	word_slice = col_string[(row - len(word) + 1):row + 1]
 
-	word_slice = col_string[row:(row + len(word))]
-
-	num = word_slice.find(word)
+	num = word_slice.find(rev_word)
 
 	if num != -1:
 

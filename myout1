@@ -12,10 +12,10 @@ BOIORORCCO
 BOAAKRKEAR
 
 
-CHICKEN: word not found
+CHICKEN: (UP) row: 8 column: 8
 DOG: word not found
 CAT: word not found
-BEAR: (BACKWARD) row: 1 column: 2
+BEAR: (BACKWARD) row: 1 column: 6
 RABBIT: (DOWN) row: 1 column: 3
 ZEBRA: (FORWARD) row: 1 column: 0
 MOUSE: word not found
