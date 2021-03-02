@@ -3,21 +3,6 @@
 
 
 
-
-
-puzzle = ["WAQHGTTWEE",
-			 "CBMIVQQELS",
-			 "AZXWKWIIIL",
-			 "LDWLFXPIPV",
-			 "PONDTMVAMN",
-			 "OEDSOYQGOB",
-			 "LGQCKGMMCT",
-			 "YCSLOACUZM",
-			 "XVDMGSXCYZ",
-			 "UUIUNIXFNU"]
-
-
-
 def get_puzzle():
 	'''
 	gets input from user and converts into a list within a list representing the puzzle

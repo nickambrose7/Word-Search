@@ -27,8 +27,7 @@ def main():
 
    		print(word + ': (' + search_word(word, puzzle)[1] + ')' + ' row: ' + str(search_word(word, puzzle)[2]) + ' column: ' + str(search_word(word, puzzle)[3]))
 
-
-   pass
+         
    
 
 
