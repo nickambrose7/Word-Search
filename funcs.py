@@ -1,6 +1,23 @@
 # Put your functions in here.
 # Feel free to run your design past me before beginning to implement.
 
+
+
+
+
+puzzle = ["WAQHGTTWEE",
+			 "CBMIVQQELS",
+			 "AZXWKWIIIL",
+			 "LDWLFXPIPV",
+			 "PONDTMVAMN",
+			 "OEDSOYQGOB",
+			 "LGQCKGMMCT",
+			 "YCSLOACUZM",
+			 "XVDMGSXCYZ",
+			 "UUIUNIXFNU"]
+
+
+
 def get_puzzle():
 	'''
 	gets input from user and converts into a list within a list representing the puzzle
@@ -50,42 +67,13 @@ def get_words():
 
 			beginning =  i + 1 #set our beginning equal to our previous end to set us up for the next time this loop runs. Must add one so that we start at the first letter not the space.
 
+		elif i == len(user_input) - 1: #this elif statement allows us to get the last word in the user_input
+
+			word = user_input[beginning:len(user_input)]
+
+			words.append(word)
+
 	return words
-
-
-
-def search_word(word, puzzle):
-	'''
-	Searches the puzzle for a specified word.
-	Loop through the list of words and call this function each time to find all words.
-	This function returns none or direction, row, and col of the word.
-
-	'''
-
-	row = find_first_letter(puzzle, word)[0]
-
-	col = find_first_letter(puzzle, word)[1]
-
-
-	if check_row(puzzle, row, col, word)[0]:
-
-		return (check_row(puzzle, row, col, word)[1], row, col)
-	
-	elif check_row_backward(puzzle, row, col, word)[0]:
-
-		return (check_row_backward(puzzle, row, col, word)[1], row, col):
-	
-	elif check_col_down(puzzle, row, col, word)[0]:
-
-		return (check_col_down(puzzle, row, col, word)[1], row, col)
-	
-	elif check_col_up(puzzle, row, col, word)[0]:
-
-		return (check_col_up(puzzle, row, col, word)[1], row, col)
-
-	elif check_diagonal(puzzle, row, col, word)[0]:
-
-		return (check_diagonal(puzzle, row, col, word)[1], row, col)
 
 
 	
@@ -96,17 +84,19 @@ def find_first_letter(puzzle, word):
 	Once first letter is found, returns row and col location so that searching can begin.
 	'''
 
-	for i in range(len(puzzle)):
+	r_c_list = [] #list of all the rows and columns that the letter is in
 
-		for j in range(len(puzzle)):
+	for i in range(0, 10):
+
+		for j in range(0, 10):
 
 			if puzzle[i][j] == word[0]:
 
-				row = i
+				r_c_list.append([i, j])
 
-				col = j
+	return r_c_list
 
-				return (row, col)
+
 
 
 def check_row(puzzle, row, col, word): #Only reason I'm inculding row AND col is to make it easier if we find the word.
@@ -119,9 +109,19 @@ def check_row(puzzle, row, col, word): #Only reason I'm inculding row AND col is
 
 	row_string = ''.join(row_list) #creates a string out of a list so that we can use .find
 
-	num = row_string.find(word) #.find returns the index of the first occurance of the substring, else returns -1.
+	word_slice = row_string[col:(col + len(word))] 
+	'''
+	this word_slice is to combat a bug I ran into. 
+	If a row/col contained the first letter of the word I was looking for, 
+	but it was not the word, yet the word was in the row, I would return the
+	row and col of the letter, but not the first letter in the word. To avoid this,
+	I am only searching the length of the word so that I know my first letter is the 
+	first letter of the actual word, not just a coincidence.
+	'''
 
-	if num == col:
+	num = word_slice.find(word) #.find returns the index of the first occurance of the substring, else returns -1.
+
+	if num == 0:
 
 		return (True, 'FORWARD', row, col)
 
@@ -146,6 +146,8 @@ def check_row_backward(puzzle, row, col, word):
 		rev_list.append(puzzle[row][i]) #makes reverse list
 
 	rev_row_string = ''.join(rev_list) #Turns reverse list into a string
+
+	word_slice = rev_row_string[col:(col + len(word))] #adjust b/c backwards
 
 	num = rev_row_string.find(word)
 
@@ -173,7 +175,9 @@ def check_col_down(puzzle, row, col, word):
 
 	col_string = ''.join(col_list) #same process as usual once we make the string
 
-	num = col_string.find(word)
+	word_slice = col_string[row:(row + len(word))]
+
+	num = word_slice.find(word)
 
 	if num != -1:
 
@@ -197,7 +201,11 @@ def check_col_up(puzzle, row, col, word):
 
 	col_string = ''.join(col_list)
 
-	num = col_string.find(word)
+
+
+	word_slice = col_string[row:(row + len(word))]
+
+	num = word_slice.find(word)
 
 	if num != -1:
 
@@ -237,6 +245,48 @@ def check_diagonal(puzzle, row, col, word):
 
 
 
+
+def search_word(word, puzzle):
+	'''
+	Searches the puzzle for a specified word.
+	Loop through the list of words and call this function each time to find all words.
+	This function returns none or direction, row, and col of the word.
+
+	'''
+
+
+
+	row_col_list = find_first_letter(puzzle, word) #list within list, all rows and cols of first letter in word.
+
+
+	for i in range(len(row_col_list)):
+
+		row = row_col_list[i][0]
+
+		col = row_col_list[i][1]
+
+	
+		if check_row(puzzle, row, col, word):
+
+			return (check_row(puzzle, row, col, word))
+		
+		elif check_row_backward(puzzle, row, col, word):
+
+			return (check_row_backward(puzzle, row, col, word))
+		
+		elif check_col_down(puzzle, row, col, word):
+
+			return (check_col_down(puzzle, row, col, word))
+		
+		elif check_col_up(puzzle, row, col, word):
+
+			return (check_col_up(puzzle, row, col, word))
+
+		elif check_diagonal(puzzle, row, col, word):
+
+			return (check_diagonal(puzzle, row, col, word))
+
+	return None
 
 	
 

@@ -30,7 +30,7 @@ class TestCases(unittest.TestCase):
 			 "XVDMGSXCYZ",
 			 "UUIUNIXFNU"]
 
-		self.assertEqual(find_first_letter(puzzle, 'CONE'), (1, 0))
+		self.assertEqual(find_first_letter(puzzle, 'CONE'), [[1, 0], [6, 3], [6, 8], [7, 1], [7, 6], [8, 7]])
 
 	def test_find_first_letter1(self):
 
@@ -45,7 +45,7 @@ class TestCases(unittest.TestCase):
 			 "XVDMGSXCYZ",
 			 "UUIUNIXFNU"]
 
-		self.assertEqual(find_first_letter(puzzle, 'ZOY'), (2, 1))
+		self.assertEqual(find_first_letter(puzzle, 'ZOY'), [[2, 1], [7, 8], [8, 9]])
 
 	def test_check_row0(self):
 
@@ -292,6 +292,96 @@ class TestCases(unittest.TestCase):
 
 
 
+	def test_search_word(self):
+
+		puzzle = ["WAQHGTTWEE",
+			 "CBMIVQQELS",
+			 "AZXWKWIIIL",
+			 "LDWLFXPIPV",
+			 "PONDTMVAMN",
+			 "OEDSOYQGOB",
+			 "LGQCKGMMCT",
+			 "YCSLOACUZM",
+			 "XVDMGSXCYZ",
+			 "UUIUNIXFNU"]
+
+		self.assertEqual(search_word('UNIX', puzzle), (True, 'FORWARD', 9, 3))
+
+	def test_search_word1(self):
+
+		puzzle = ["WAQHGTTWEE",
+			 "CBMIVQQELS",
+			 "AZXWKWIIIL",
+			 "LDWLFXPIPV",
+			 "PONDTMVAMN",
+			 "OEDSOYQGOB",
+			 "LGQCKGMMCT",
+			 "YCSLOACUZM",
+			 "XVDMGSXCYZ",
+			 "UUIUNIXFNU"]
+
+		self.assertEqual(search_word('XINU', puzzle), (True, 'BACKWARD', 9, 6))
+
+	def test_search_word2(self):
+
+		puzzle = ["WAQHGTTWEE",
+			 "CBMIVQQELS",
+			 "AZXWKWIIIL",
+			 "LDWLFXPIPV",
+			 "PONDTMVAMN",
+			 "OEDSOYQGOB",
+			 "LGQCKGMMCT",
+			 "YCSLOACUZM",
+			 "XVDMGSXCYZ",
+			 "UUIUNIXFNU"]
+
+		self.assertEqual(search_word('CALPOLY', puzzle), (True, 'DOWN', 1, 0))
+
+
+	def test_search_word3(self):
+
+		puzzle = ["WAQHGTTWEE",
+			 "CBMIVQQELS",
+			 "AZXWKWIIIL",
+			 "LDWLFXPIPV",
+			 "PONDTMVAMN",
+			 "OEDSOYQGOB",
+			 "LGQCKGMMCT",
+			 "YCSLOACUZM",
+			 "XVDMGSXCYZ",
+			 "UUIUNIXFNU"]
+
+		self.assertEqual(search_word('YLOPLAC', puzzle), (True, 'UP', 7, 0))
+
+	def test_search_word4(self):
+
+		puzzle = ["WAQHGTTWEE",
+			 "CBMIVQQELS",
+			 "APXWKWIIIL",
+			 "LDELFXPIPV",
+			 "PONDTMVAMN",
+			 "OEDSOYQGOB",
+			 "LGQCKGMMCT",
+			 "YCSLOACUZM",
+			 "XVDMGSXCYZ",
+			 "UUIUNIXFNU"]
+
+		self.assertEqual(search_word('CPE', puzzle), (True, 'DIAGONAL', 1, 0))
+
+	def test_search_word5(self):
+
+		puzzle = ["WAQHGTTWEE",
+			 "CBMIVQQELS",
+			 "APXWKWIIIL",
+			 "LDELFXPIPV",
+			 "PONDTMVAMN",
+			 "OEDSOYQGOB",
+			 "LGQCKGMMCT",
+			 "YCSLOACUZM",
+			 "XVDMGSXCYZ",
+			 "UUIUNIXFNU"]
+
+		self.assertEqual(search_word('DHFLSBJSDF', puzzle), None)
 
 
 
