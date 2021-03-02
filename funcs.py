@@ -165,7 +165,7 @@ def check_col_down(puzzle, row, col, word):
 
 	col_list = []
 
-	for i in range(9):
+	for i in range(10):
 
 		col_list.append(puzzle[i][col]) #we want the row to change and the col to stay the same
 
@@ -191,7 +191,7 @@ def check_col_up(puzzle, row, col, word):
 	'''
 	col_list = []
 
-	for i in range(9):
+	for i in range(10):
 
 		col_list.append(puzzle[i][col]) #we want the row to change and the col to stay the same
 
@@ -221,7 +221,7 @@ def check_diagonal(puzzle, row, col, word):
 
 	diag_list = [] 
 
-	for i in range(9):
+	for i in range(10):
 
 		if (i + row) <= 9 and (i + col) <= 9: #make sure we stay within indexes
 
